@@ -1,0 +1,19 @@
+.about-us {
+    max-width: 800px; /* גודל מקסימלי לרוחב */
+    margin: 20px auto; /* מרכז את הקומפוננטה */
+    padding: 20px; /* ריווח פנימי */
+    border: 1px solid #ddd; /* גבול סביב הקומפוננטה */
+    border-radius: 8px; /* פינות מעוגלות */
+    background-color: #f9f9f9; /* צבע רקע */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* צל */
+}
+
+.about-us h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.about-us p {
+    color: #555;
+    line-height: 1.6;
+}

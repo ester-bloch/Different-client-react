@@ -1,0 +1,44 @@
+.blog-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+    font-size: 1.5em;
+    color: #2c3e50;
+}
+
+.post-excerpt {
+    color: #7f8c8d;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}

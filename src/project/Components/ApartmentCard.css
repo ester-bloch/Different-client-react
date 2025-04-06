@@ -1,0 +1,49 @@
+.apartment-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px; /* רווח בין הכרטיסים */
+    box-shadow: 0 4px 15px rgba(20, 60, 218, 0.2);
+    transition: box-shadow 0.3s, transform 0.3s;
+    background-color: #ffffff; /* צבע רקע לבן */
+    text-align: center; /* טקסט מסודר למרכז */
+}
+
+.apartment-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.apartment-card h2 {
+    margin-top: 0;
+    color: #2c3e50; /* צבע טקסט כהה */
+    font-size: 1.5em;
+}
+
+.apartment-card p {
+    line-height: 1.6;
+    color: #555; /* צבע טקסט כהה יותר */
+}
+
+.apartment-card ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+.apartment-card img {
+    width: 100%; /* תמונה תתפרס לרוחב המיכל */
+    height: auto; /* גובה יתאים באופן אוטומטי לשמור על יחס הגובה-רוחב */
+    max-height: 200px; /* גובה מקסימלי לתמונה */
+    object-fit: cover; /* התמונה תתמלא במיכל מבלי לעוות את יחס הגובה-רוחב */
+    border-radius: 10px; /* רדיוס פינות לתמונה */
+}
+
+.allAparts {
+    display: grid;
+    /* עמודות גמישות עם רוחב מינימלי */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    /* grid-template-columns: auto auto auto auto; */
+    gap: 20px; /* רווח בין הכרטיסים */
+    justify-items: center; /* מרכז את הכרטיסים */
+    padding: 20px; /* ריפוד סביב הגריד */
+}
+

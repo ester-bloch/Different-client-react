@@ -1,0 +1,54 @@
+.post-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+    font-size: 2em;
+    color: #2c3e50;
+}
+
+.post-excerpt {
+    color: #7f8c8d;
+    margin: 15px 0;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+.post-container {
+    max-width: 800px; /* גודל מקסימלי לרוחב */
+    margin: 20px auto; /* מרכז את הקומפוננטה */
+    padding: 20px; /* ריווח פנימי */
+    border: 1px solid #ddd; /* גבול סביב הקומפוננטה */
+    border-radius: 8px; /* פינות מעוגלות */
+    background-color: #f9f9f9; /* צבע רקע */
+}
+
+.post-title {
+    font-size: 24px; /* גודל כותרת */
+    margin-bottom: 10px; /* ריווח תחתון */
+}
+
+.post-excerpt {
+    font-size: 16px; /* גודל טקסט של תקציר */
+    color: #555; /* צבע טקסט */
+    margin-bottom: 20px; /* ריווח תחתון */
+}
+
+.post-content {
+    font-size: 16px; /* גודל טקסט תוכן */
+    line-height: 1.5; /* רווח בין שורות */
+    color: #333; /* צבע טקסט */
+}
