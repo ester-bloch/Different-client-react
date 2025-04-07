@@ -11,7 +11,24 @@ import { useNavigate } from "react-router";
 export const LoginModal = ({ setIsTokenValid }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const errorOptions = {
+    name: "שם קצר מידי",
+    email: "כתובת מייל לא תקינה",
+    password: "סיסמא לא תקינה",
+    password2: "סיסמא חייבת להיות תואמת",
+    phoneNumber: "מספר טלפון חייב להכיל 10 ספרות",
+    phoneNumber2: "מספר טלפון חייב להכיל 10 ספרות",
+  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const handleOpen = () => {
+    if (open) {
+      setEmailError("");
+      setPasswordError("");
+    }
     setOpen(!open);
   };
   const emailRef = useRef();
@@ -34,7 +51,44 @@ export const LoginModal = ({ setIsTokenValid }) => {
     },
   };
 
+  const validateEmail = (email) => {
+    // /regex/i.test(value)
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("מייל לא תקין");
+    } else {
+      setEmailError("");
+    }
+  };
+  const validatePassword = (password) => {
+    // /regex/i.test(value)
+    if (!password) {
+      setPasswordError("אנא הכנס סיסמא");
+    } else {
+      setPasswordError("");
+    }
+  };
+  const validateForm = () => {
+    let valid = true;
+    
+
+    if (!email) {
+      setEmailError("אנא הכנס מייל");
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("מייל לא תקין");
+      valid = false;
+    }
+
+    if (!password) {
+      setPasswordError("אנא הכנס סיסמא");
+      valid = false;
+    }
+
+    return valid;
+  };
+
   const handleClose = () => {
+    if (validateForm()) {
     Login({
       email: emailRef.current.value,
       password: passwordRef.current.value,
@@ -47,31 +101,37 @@ export const LoginModal = ({ setIsTokenValid }) => {
         localStorage.setItem("different_decoded_Token", JSON.stringify(decoded));
         localStorage.setItem("different_token", token);
         console.log(data);
-        setIsTokenValid(true)
+        setIsTokenValid(true);
         navigate("../");
       })
       .catch((err) => {
         navigate("./Register");
       });
     setOpen(false);
-  };
+  }
+};
 
   return (
     <>
       <MyButton iconName={"fa-solid fa-sign-in-alt"} myOnClick={handleOpen} textToShow={"כניסת מפרסם"} myType={"button"} />
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={() => {setOpen(false);
+        setEmailError("")
+        setPasswordError("")
+       } }>
         <Box sx={style}>
-          <h2 style={{ textAlign: "center", fontWeight: "bold", color: "#333" }}>
-            {" "}
-            {/* צבע טקסט כהה */}
-            כניסת מפרסם
-          </h2>
+          <h2 style={{ textAlign: "center", fontWeight: "bold", color: "#333" }}> {/* צבע טקסט כהה */}כניסת מפרסם </h2>
           <TextField
             label="מייל"
             variant="outlined"
             fullWidth
             margin="normal"
-            inputRef={emailRef} // חיבור ה-ref לשדה הקלט
+            inputRef={emailRef}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              validateEmail(e.target.value);
+            }}
+            error={!!emailError}
+            helperText={emailError}
             sx={{
               borderRadius: "8px",
               "& .MuiOutlinedInput-root": {
@@ -93,7 +153,13 @@ export const LoginModal = ({ setIsTokenValid }) => {
             variant="outlined"
             fullWidth
             margin="normal"
-            inputRef={passwordRef} // חיבור ה-ref לשדה הקלט
+            inputRef={passwordRef}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              validatePassword(e.target.value);
+            }}
+            error={!!passwordError}
+            helperText={passwordError}
             sx={{
               borderRadius: "8px",
               "& .MuiOutlinedInput-root": {
@@ -109,17 +175,23 @@ export const LoginModal = ({ setIsTokenValid }) => {
               },
             }}
           />
+
           <Button
             variant="contained"
             color="primary"
-            onClick={handleClose}
+            onClick={() => {
+              if (validateForm()) {
+                handleClose();
+                // כאן תוכל להוסיף את הלוגיקה לשליחת הנתונים
+              }
+            }}
             sx={{
               borderRadius: "8px",
               width: "100%",
               marginTop: "16px",
               "&:hover": {
-                backgroundColor: "#0056b3", // צבע כהה יותר בהובר
-                transform: "scale(1.05)", // הגדלה קלה בעת ה-hover
+                backgroundColor: "#0056b3",
+                transform: "scale(1.05)",
               },
             }}>
             אישור
