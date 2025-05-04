@@ -32,6 +32,7 @@ export const LoginModal = ({ setIsTokenValid }) => {
     setOpen(!open);
   };
   const emailRef = useRef();
+  const text=process.env.NODE_ENV === 'development'?"develop":"notDevelop"
   const passwordRef = useRef();
   const dispatch = useDispatch();
   const style = {
@@ -69,7 +70,6 @@ export const LoginModal = ({ setIsTokenValid }) => {
   };
   const validateForm = () => {
     let valid = true;
-    
 
     if (!email) {
       setEmailError("אנא הכנס מייל");
@@ -89,39 +89,47 @@ export const LoginModal = ({ setIsTokenValid }) => {
 
   const handleClose = () => {
     if (validateForm()) {
-    Login({
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    })
-      .then((data) => {
-        let { token, thisAdvertiser } = data.data;
-        dispatch(setAdvertiser(thisAdvertiser));
-        dispatch(setToken(token));
-        const decoded = jwtDecode(token);
-        localStorage.setItem("different_decoded_Token", JSON.stringify(decoded));
-        localStorage.setItem("different_token", token);
-        console.log(data);
-        setIsTokenValid(true);
-        navigate("../");
-      })
-      .catch((err) => {
-        navigate("./Register");
-      });
-    setOpen(false);
-  }
-};
+      let details = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      };
+      Login(details)
+        .then((ans) => {
+          let { token, thisAdvertiser } = ans.data;
+          delete thisAdvertiser[password];
+          dispatch(setAdvertiser(thisAdvertiser));
+          console.log(thisAdvertiser)
+          dispatch(setToken(token));
+          const decoded = jwtDecode(token);
+          localStorage.setItem("different_decoded_Token", JSON.stringify(decoded));
+          localStorage.setItem("different_token", token);
+          localStorage.setItem("different_this_advertiser", JSON.stringify(thisAdvertiser));
+          setIsTokenValid(true);
+          navigate("../");
+        })
+        .catch((err) => {
+          navigate("./Register");
+        });
+      setOpen(false);
+    }
+  };
+  
+
 
   return (
     <>
       <MyButton iconName={"fa-solid fa-sign-in-alt"} myOnClick={handleOpen} textToShow={"כניסת מפרסם"} myType={"button"} />
-      <Modal open={open} onClose={() => {setOpen(false);
-        setEmailError("")
-        setPasswordError("")
-       } }>
+      <Modal
+        open={open}
+        onClose={() => {
+          setOpen(false);
+          setEmailError("");
+          setPasswordError("");
+        }}>
         <Box sx={style}>
           <h2 style={{ textAlign: "center", fontWeight: "bold", color: "#333" }}> {/* צבע טקסט כהה */}כניסת מפרסם </h2>
           <TextField
-            label="מייל"
+            label={"mail"}
             variant="outlined"
             fullWidth
             margin="normal"

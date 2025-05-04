@@ -1,21 +1,23 @@
 import React from "react";
+import { MyButton } from "./MyButton";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 // import "./ApartmentCard.css"; // נניח שיש לך קובץ CSS נפרד
 
 const ApartmentCard = ({ apartment }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const setThisApart = (apartment) => {
+    dispatch({ type: "SET_APARTMENT", payload: apartment });
+    navigate("showApart");
+  };
   return (
     <>
       {apartment && (
         <div className="apartment-card">
-          {apartment.picture && (
-            <img
-              src={`${process.env.PUBLIC_URL}/images/aparts/${apartment.picture}`}
-              alt={apartment.name}
-            />
-          )||
-          <img
-            src={`${process.env.PUBLIC_URL}/images/aparts/1.jpg`}
-            alt={apartment.name}
-          />}
+          {(apartment.picture && <img src={`${process.env.PUBLIC_URL}/images/aparts/${apartment.picture}`} alt={apartment.name} />) || (
+            <img src={`${process.env.PUBLIC_URL}/images/aparts/1.jpg`} alt={apartment.name} />
+          )}
 
           {apartment.category && (
             <p>
@@ -43,28 +45,14 @@ const ApartmentCard = ({ apartment }) => {
               <strong>מספר חדרים:</strong> {apartment.numbeds}
             </p>
           )}
-          {apartment.price && (
-            <p>
-              <strong>מחיר:</strong> {apartment.price} ש"ח
-            </p>
-          )}
-          {apartment.more && apartment.more.length > 0 && (
-            <>
-              <p>
-                <strong>מפרט נוסף:</strong>
-              </p>
-              <ul>
-                {apartment.more.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </>
-          )}
-          {apartment.advertizer && apartment.advertizer.email && (
-            <p>
-              <strong>מפרסם:</strong> {apartment.advertizer.email}
-            </p>
-          )}
+          <MyButton
+            myOnClick={() => {
+              setThisApart(apartment);
+            }}
+            textToShow={"לפרטים נוספים"}
+            iconName={"fa-solid fa-arrow-right"}
+            backgroundColor={"#287edb"}
+          />
         </div>
       )}
     </>

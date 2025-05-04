@@ -157,9 +157,6 @@ export const setCurrentPost = (postId) => {
 export const PostRedux = produce((state, action) => {
     switch (action.type) {
         case "SET_CURRENT_POST": {
-            console.log(action)
-            console.log(state.posts)
-            console.log(state)
             const post = state.posts.find((post) => post.id === action.payload);
             if (post) {
                 state.currentPost = post; // עדכון ה-currentPost עם הפוסט שנמצא

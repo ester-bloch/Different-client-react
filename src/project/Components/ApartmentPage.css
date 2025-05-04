@@ -1,0 +1,34 @@
+.apartment-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  };
+  .ul{
+    direction: rtl; /* מגדיר את כיוון הטקסט מימין לשמאל */
+
+  }
+  .apartment-card h2 {
+    margin-bottom: 12px;
+    color: #333;
+  }
+  
+  .apartment-card p {
+    margin: 8px 0;
+    color: #555;
+  }
+  
+  .apartment-card ul {
+    list-style-type: none; /* מסיר את הסימנים ברשימה */
+    padding: 0; /* מסיר את הריפוד ברשימה */
+  }
+  
+  .apartment-card li {
+    background-color: #e9ecef;
+    margin: 4px 0;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  

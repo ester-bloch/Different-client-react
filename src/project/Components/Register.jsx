@@ -2,26 +2,26 @@ import React, { useState } from "react";
 import "./Register.css";
 import { MyButton } from "./MyButton";
 import { useDispatch } from "react-redux";
-import { setAdvertiserFromRegister } from "../Data-Redux/advertiserRedux";
+import { setAdvertiser, setAdvertiserFromRegister } from "../Data-Redux/advertiserRedux";
 import { register } from "../scripts/api";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-export const RegisterOrUpdate = ({ advertiser, functionToMarkFinishes }) => {
+import useParentPath from "../scripts/ParetntPath";
+export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) => {
   const dispatch = useDispatch();
+  const ParentPath =useParentPath()
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(
-    advertiser
-      ? advertiser
-      : {
-          email: "",
-          password: "",
-          password2: "",
-          phoneNumber: "",
-          phoneNumber2: "",
-          apartments: "",
-          name: "",
-        }
-  );
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    password2: "",
+    phoneNumber: "",
+    phoneNumber2: "",
+    apartments: "",
+    name: "",
+    ...advertiser && { ...advertiser, password2: advertiser.password }
+  });
+  
   const errorOptions = {
     name: "שם קצר מידי",
     email: "כתובת מייל לא תקינה",
@@ -33,12 +33,15 @@ export const RegisterOrUpdate = ({ advertiser, functionToMarkFinishes }) => {
   const [errors, setErrors] = useState({});
 
   const validate = () => {
-    if (!formData.email.includes("@")) setErrors({ ...errors, email: errorOptions.email });
+    if (formData.password2 != formData.password) setErrors({ ...errors, password2: errorOptions.password2 });
+    let phoneNumber2String = "" + formData.phoneNumber2;
+    if (formData.phoneNumber2 && !phoneNumber2String.match(/^\d{10}$/)) {
+      setErrors({ ...errors, phoneNumber2: errorOptions.phoneNumber2 });
+    }
     if (formData.password.length < 6) setErrors({ errors, password: errorOptions.password });
     if (!formData.phoneNumber.match(/^\d{10}$/)) setErrors({ errors, phoneNumber: errorOptions.phoneNumber });
-    if (formData.phoneNumber2 && !formData.phoneNumber2.match(/^\d{10}$/)) setErrors({ ...errors, phoneNumber2: errorOptions.phoneNumber2 });
+    if (!formData.email.includes("@")) setErrors({ ...errors, email: errorOptions.email });
     if (!formData.name) setErrors({ ...errors, name: "יש להכניס שם" });
-
     return Object.values(errors).every((value) => value === null || value === "" || value === undefined) && formData.email != "" && formData.email != undefined;
   };
 
@@ -75,8 +78,6 @@ export const RegisterOrUpdate = ({ advertiser, functionToMarkFinishes }) => {
     }
   };
   const validatePassword2 = (value) => {
-    console.log("formData.password=" + formData.password);
-    console.log("formData.password2=" + formData.password2);
     if (value != formData.password) {
       setErrors({ ...errors, password2: errorOptions.password2 });
     } else {
@@ -95,11 +96,30 @@ export const RegisterOrUpdate = ({ advertiser, functionToMarkFinishes }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      dispatch(setAdvertiserFromRegister(formData));
-      if (functionToMarkFinishes != undefined) {
-        functionToMarkFinishes(true);
-      } else
-        functionToMarkFinishes == undefined &&
+      if (functionToUpdate != undefined) {
+        functionToUpdate(formData)
+          .then((ans) => {
+            dispatch(setAdvertiser(ans.data.advertiser)) 
+            Swal.fire({
+              title: "! פרטיך עודכנו",
+              text: "!עודכן בהצלחה",
+              icon: "success",
+              confirmButtonText: "תודה",
+            });
+            navigate(ParentPath)
+          })
+          .catch((err) => {
+            console.error("Error in functionToUpdate:", err);
+            Swal.fire({
+              title: "!שגיאה",
+              text: err,
+              icon: "error",
+              confirmButtonText: "בסדר",
+            });
+            navigate(ParentPath)
+          });
+      } else {
+        functionToUpdate == undefined &&
           register(formData)
             .then(() => {
               Swal.fire({
@@ -117,17 +137,21 @@ export const RegisterOrUpdate = ({ advertiser, functionToMarkFinishes }) => {
                 confirmButtonText: "בסדר",
               });
             });
+
+        // כאן תוכל להוסיף את הלוגיקה לשליחת הנתונים לשרת
+      }
       let r = " כעת לחץ על כניסת מפרסם והיכנס!diferrent נרשמת בהצלחה ל ";
 
-      // כאן תוכל להוסיף את הלוגיקה לשליחת הנתונים לשרת
-    } else {
+      dispatch(setAdvertiserFromRegister(formData));
+      navigate("./");
     }
   };
-
+  
   return (
     <>
       <form
         onSubmit={handleSubmit}
+        
         style={{
           maxWidth: "400px",
           margin: "auto",
@@ -136,7 +160,7 @@ export const RegisterOrUpdate = ({ advertiser, functionToMarkFinishes }) => {
           borderRadius: "5px",
           boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
         }}>
-        <h2>הרשמת מפרסם</h2>
+        <h2>{textForH1 ? textForH1 : "הרשמת מפרסם"} </h2>
 
         <div>
           <label htmlFor="name">שם:</label>
@@ -169,7 +193,7 @@ export const RegisterOrUpdate = ({ advertiser, functionToMarkFinishes }) => {
           {errors.phoneNumber2 && <p style={{ color: "red" }}>{errors.phoneNumber2}</p>}
         </div>
 
-        <MyButton myType="submit" iconName={"fa-solid fa-check"} textToShow={"Register"}></MyButton>
+        {<MyButton myType="submit" iconName={"fa-solid fa-check"} textToShow={"אישור"}></MyButton>}
       </form>
     </>
   );

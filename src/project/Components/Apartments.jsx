@@ -12,7 +12,6 @@ export const Apartments = () => {
         setApartments(data.data);
       })
       .catch((err) => {
-        alert(err.message);
       });
   }, []);
 
