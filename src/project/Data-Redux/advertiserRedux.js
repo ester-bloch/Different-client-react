@@ -10,7 +10,9 @@ export const advertiserReducer = produce((state, action) => {
     switch (action.type) {
         case 'SET_ADVERTISER':
             state.thisAdvertiser = action.payload;
-            console.log(state.thisAdvertiser)
+            break;
+        case 'SET_APARTMENTS_FROM_SEARCH':
+            state.searchAparts = action.payload;
             break;
         case 'SET_APARTMENTS_OF_THIS_ADVERTISER':
             state.aparts = action.payload;
@@ -59,5 +61,11 @@ export const setToken = (token) => {
     return {
         type: 'SET_TOKEN',
         payload: token
+    }
+}
+export const setApartmentsFromSearch = (data) => {
+    return {
+        type: 'SET_APARTMENTS_FROM_SEARCH',
+        payload: data
     }
 }

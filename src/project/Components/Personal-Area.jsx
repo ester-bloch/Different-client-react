@@ -5,23 +5,19 @@ import { MyButton } from "./MyButton";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { setApartment, setApartmentOfThisAdvertiser } from "../Data-Redux/advertiserRedux";
 import { getApartsByAdvertiser } from "../scripts/api";
-// import ApartmentDetails from './ApartmentDetails'; // קומפוננטת פרטי דירה
 
 export const PersonalErea = () => {
-  // const thisAdvertiser = useSelector((state) => state.advertise.thisAdvertiser);
-  // const thisAdvertiser = JSON.parse(localStorage.getItem("different_this_advertiser"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [thisAdvertiser,setThisAdvertiser]=useState({});
+  const [thisAdvertiser, setThisAdvertiser] = useState({});
   const { email, phoneNumber2, phoneNumber, name, _id } = thisAdvertiser;
   const [apartments, setApartments] = useState([]);
   const [changed, setChanged] = useState(0);
   const [textToShowOpen, setTextToShowOpen] = useState("עריכה");
   
-  
   useEffect(() => {
     setThisAdvertiser(JSON.parse(localStorage.getItem("different_this_advertiser")));
-    const { _id } = JSON.parse(localStorage.getItem("different_this_advertiser"))
+    const { _id } = JSON.parse(localStorage.getItem("different_this_advertiser"));
     if (_id) {
       getApartsByAdvertiser(_id)
         .then((ans) => {
@@ -31,19 +27,19 @@ export const PersonalErea = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [ changed]);
+  }, [changed]);
+
   if (!thisAdvertiser) {
-    return <div>טוען...</div>; // או הודעת שגיאה מתאימה
+    return <div>טוען...</div>;
   }
   
   const handleEdit = () => {
-    //personal-area/editDetails
     navigate("editDetails");
   };
+
   const addApart = () => {
     setChanged(changed + 1);
     navigate("addApart");
-
   };
 
   const updateApart = (apartment) => {
@@ -78,10 +74,6 @@ export const PersonalErea = () => {
         )}
       </div>
       <MyButton iconName={"fa-solid fa-plus"} textToShow={"הוספת דירה"} myOnClick={() => addApart()}></MyButton>
-
-      {/* {selectedApartment && (
-        <ApartmentDetails apartment={selectedApartment} onClose={closeDetails} />
-      )} */}
     </>
   );
 };

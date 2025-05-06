@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { MyButton } from "./MyButton.jsx";
-import "./UserAvatar.css"; // קובץ CSS לעיצוב
+import "./UserAvatar.css"; 
 import { useNavigate } from "react-router";
 
 const UserAvatar = ({ setIsTokenValid }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  // הנחה שהשם נמצא בסטור בנתיב 'user.name'
   const user = useSelector((state) => state.advertise.thisAdvertiser);
   const textToShow = user.name? user.name : user.email? user.email : "משתמש לא מזוהה";
-  // קבלת האות הראשונה מהשם
   const now = new Date();
   const hours = now.getHours();
 
@@ -33,7 +31,6 @@ const UserAvatar = ({ setIsTokenValid }) => {
   };
 
   const handleConfirmLogout = () => {
-    // כאן תוכל להוסיף את הלוגיקה של ה-logout
     localStorage.removeItem("different_token");
     localStorage.removeItem("different_decoded_Token");
     localStorage.removeItem("different_this_advertiser");
@@ -47,10 +44,7 @@ const UserAvatar = ({ setIsTokenValid }) => {
   };
   return (
     <div>
-      {/* <div className="user-avatar" onClick={handleLogoutClick}> */}
         <MyButton backgroundColor={"#6c757d"} textToShow={textToShow + "  " + timeOfDay + "  טוב" + " "} myOnClick={handleLogoutClick}></MyButton>
-        {/* {firstLetter} {timeOfDay} {"טוב"}{" "} */}
-      {/* </div> */}
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">

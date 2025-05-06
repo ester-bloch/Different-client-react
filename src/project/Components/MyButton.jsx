@@ -1,7 +1,7 @@
 import "./MyButton.css"
 export const MyButton = ({textToShow,backgroundColor,iconName,myType,myOnClick,}) => {
 const style = {
-    backgroundColor: backgroundColor?backgroundColor: '#007bff' // צבע כחול ברירת מחדל
+    backgroundColor: backgroundColor?backgroundColor: '#007bff' 
 };
     return (
         <>

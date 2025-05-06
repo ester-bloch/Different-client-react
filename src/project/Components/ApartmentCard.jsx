@@ -2,7 +2,6 @@ import React from "react";
 import { MyButton } from "./MyButton";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-// import "./ApartmentCard.css"; // נניח שיש לך קובץ CSS נפרד
 
 const ApartmentCard = ({ apartment }) => {
   const dispatch = useDispatch();

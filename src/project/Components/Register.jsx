@@ -138,7 +138,6 @@ export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) =>
               });
             });
 
-        // כאן תוכל להוסיף את הלוגיקה לשליחת הנתונים לשרת
       }
       let r = " כעת לחץ על כניסת מפרסם והיכנס!diferrent נרשמת בהצלחה ל ";
 

@@ -1,28 +1,29 @@
 .filter {
     padding: 10px;
     margin: 5px;
-    background-color: lightblue;
+    background-color: #519be9;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 80%;
+    box-sizing: border-box;
 }
 
 .remove-button {
     margin-left: 10px;
     cursor: pointer;
-    background-color: transparent; /* רקע שקוף */
-    color: #ff4d4d; /* טקסט אדום */
-    border: none; /* ללא גבול */
-    font-size: 16px; /* גודל טקסט */
-    transition: color 0.3s; /* אנימציית שינוי צבע */
+    background-color: transparent;
+    color: #ff4d4d;
+    border: none;
+    font-size: 16px;
+    transition: color 0.3s;
 }
 
 .remove-button:hover {
-    color: #ff1a1a; /* צבע כהה יותר כשמחכים על הכפתור */
+    color: #ff1a1a;
 }
-
 
 .drop-zone {
     min-width: 300px;

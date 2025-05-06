@@ -14,11 +14,10 @@ export const ShowApartPage=({ handleClose, handleConfirm }) => {
   const navigate = useNavigate();
   const parenrPath = useParentPath();
   const thisApart = useSelector((s) => s.advertise.thisApartment);
-  console.log(thisApart)
   if (!handleClose)
     handleClose = () => {
       setOpen(false);
-      navigate(parenrPath); // ניתוב לנתיב החדש
+      navigate(parenrPath); 
     };
   return (
     <Modal open={true} onClose={handleClose} aria-labelledby="modal-title" aria-describedby="modal-description">
@@ -46,8 +45,8 @@ const style = {
   boxShadow: 24,
   p: 4,
   borderRadius: 2,
-  maxHeight: '80vh', // הגבלת גובה החלון ל-80% מגובה המסך
-  overflowY: 'auto', // הוספת גלילה אנכית
+  maxHeight: '80vh', 
+  overflowY: 'auto', 
 };
 
 

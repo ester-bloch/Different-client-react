@@ -1,5 +1,4 @@
 import { MyButton } from "./MyButton";
-
 import { Modal, Box, TextField, Button } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { Login } from "../scripts/api";
@@ -32,7 +31,7 @@ export const LoginModal = ({ setIsTokenValid }) => {
     setOpen(!open);
   };
   const emailRef = useRef();
-  const text=process.env.NODE_ENV === 'development'?"develop":"notDevelop"
+  const text = process.env.NODE_ENV === 'development' ? "develop" : "notDevelop";
   const passwordRef = useRef();
   const dispatch = useDispatch();
   const style = {
@@ -41,33 +40,33 @@ export const LoginModal = ({ setIsTokenValid }) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: "#f0f8ff", // צבע רקע מעניין (כחול בהיר)
-    border: "1px solid rgba(0, 123, 255, 0.5)", // גבול רך עם שקיפות
-    borderRadius: "30px", // גבולות רכים יותר
-    boxShadow: "0 8px 30px rgba(0, 0, 0, 0.2)", // הצללה רכה
+    bgcolor: "#f0f8ff",
+    border: "1px solid rgba(0, 123, 255, 0.5)",
+    borderRadius: "30px",
+    boxShadow: "0 8px 30px rgba(0, 0, 0, 0.2)",
     p: 4,
-    transition: "box-shadow 0.3s ease", // מעבר חלק
+    transition: "box-shadow 0.3s ease",
     "&:hover": {
-      boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)", // הצללה בולטת יותר בהובר
+      boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)",
     },
   };
 
   const validateEmail = (email) => {
-    // /regex/i.test(value)
     if (!/\S+@\S+\.\S+/.test(email)) {
       setEmailError("מייל לא תקין");
     } else {
       setEmailError("");
     }
   };
+  
   const validatePassword = (password) => {
-    // /regex/i.test(value)
     if (!password) {
       setPasswordError("אנא הכנס סיסמא");
     } else {
       setPasswordError("");
     }
   };
+  
   const validateForm = () => {
     let valid = true;
 
@@ -98,7 +97,6 @@ export const LoginModal = ({ setIsTokenValid }) => {
           let { token, thisAdvertiser } = ans.data;
           delete thisAdvertiser[password];
           dispatch(setAdvertiser(thisAdvertiser));
-          console.log(thisAdvertiser)
           dispatch(setToken(token));
           const decoded = jwtDecode(token);
           localStorage.setItem("different_decoded_Token", JSON.stringify(decoded));
@@ -113,8 +111,6 @@ export const LoginModal = ({ setIsTokenValid }) => {
       setOpen(false);
     }
   };
-  
-
 
   return (
     <>
@@ -127,7 +123,7 @@ export const LoginModal = ({ setIsTokenValid }) => {
           setPasswordError("");
         }}>
         <Box sx={style}>
-          <h2 style={{ textAlign: "center", fontWeight: "bold", color: "#333" }}> {/* צבע טקסט כהה */}כניסת מפרסם </h2>
+          <h2 style={{ textAlign: "center", fontWeight: "bold", color: "#333" }}>כניסת מפרסם</h2>
           <TextField
             label={"mail"}
             variant="outlined"
@@ -144,13 +140,13 @@ export const LoginModal = ({ setIsTokenValid }) => {
               borderRadius: "8px",
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "#ccc", // גבול בהיר לשדה קלט
+                  borderColor: "#ccc",
                 },
                 "&:hover fieldset": {
-                  borderColor: "#888", // גבול כהה יותר בהובר
+                  borderColor: "#888",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#3f51b5", // גבול צבע מותאם כאשר השדה בפוקוס
+                  borderColor: "#3f51b5",
                 },
               },
             }}
@@ -190,7 +186,6 @@ export const LoginModal = ({ setIsTokenValid }) => {
             onClick={() => {
               if (validateForm()) {
                 handleClose();
-                // כאן תוכל להוסיף את הלוגיקה לשליחת הנתונים
               }
             }}
             sx={{

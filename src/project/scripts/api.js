@@ -1,13 +1,12 @@
 import axios from 'axios'
-const baseURL = 'http://localhost:3001/'// הכנס כאן את ה-baseURL שלך
+const baseURL = 'http://localhost:3001/'
 axios.interceptors.request.use(config => {
-    const token = localStorage.getItem('different_token'); // שליפת הטוקן מ-localStorage
+    const token = localStorage.getItem('different_token'); 
     if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`; // הוספת הטוקן לכותרת
+        config.headers['Authorization'] = `Bearer ${token}`;
     }
-    return config; // החזרת הקונפיגורציה המעודכנת
-}, error => {
-    return Promise.reject(error); // טיפול בשגיאות
+    return config; }, error => {
+    return Promise.reject(error); 
 });
 
 axios.interceptors.response.use(
@@ -22,10 +21,8 @@ axios.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-// הוספת אינטרספטור לתגובה
 
-// הגדרת baseURL כברירת מחדל
-axios.defaults.baseURL = baseURL; // הכנס כאן את ה-baseURL שלך
+axios.defaults.baseURL = baseURL; 
 
 
 export const getAllApartments = async () => {
@@ -44,7 +41,6 @@ export const register = async (advertiser) => {
     return axios.post(`advertiser/register`, advertiser)
 }
 export const updateAdvertiser = async (advertiser) => {
-    //http://localhost:3001/advertiser/update/22@gmail.com
     return axios.patch(`advertiser/update/${advertiser.email}`, advertiser)
 }
 export const updateApartment = async (apart, id) => {
@@ -54,8 +50,6 @@ export const deleteApartment = async (apart) => {
     return axios.delete(`apartment/${apart._id}`)
 }
 export const getApartsByAdvertiser = async (AdvertiserId) => {
-    console.log(AdvertiserId)
-    //http://localhost:3001/advertiser/ById/id
     return axios.get(`apartment/getByAdvertiser/${AdvertiserId}`)
 }
 export const getWeather = async (city) => {
@@ -66,6 +60,11 @@ export const getAdvertiserDetails = async (advertiserId) => {
     return axios.get(`advertiser/ById/${advertiserId}`)
 }
 export const addapart = async (apart,id) => {
-    console.log(apart)
     return axios.post(`apartment`, apart)
+}
+export const getApartmentsByFilter=async(filter)=>{
+    return axios.post(`apartment/getByFilter`, filter)
+}
+export const getCityByName= async (name)=>{
+    return axios.get(`city/getByName/${name}`)
 }

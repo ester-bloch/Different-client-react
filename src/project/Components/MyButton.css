@@ -3,26 +3,25 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    color: white; /* צבע טקסט */
+    color: white; 
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* הוספת אנימציה */
-    display: inline-block; /* שנה ל-inline-block */
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    display: inline-block;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* הוספת צל */
-    /* background-color: #287edb; */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .myButton:hover {
-    opacity: 0.9; /* שינוי שקיפות */
-    transform: translateY(-2px); /* הנפשה קלה של הכפתור */
+    opacity: 0.9; 
+    transform: translateY(-2px); 
 }
 
 .myButton:active {
-    transform: translateY(0); /* החזרת הכפתור למקומו כאשר לוחצים עליו */
+    transform: translateY(0); 
 }
 
 .myButton i {
-    margin-left: 8px; /* רווח בין האייקון לטקסט */
-}
+    margin-left: 8px;
+ }

@@ -12,7 +12,6 @@ export const ApartmentPage = ({ apartment }) => {
     if (apartment.city) {
       getWeather(apartment.city.name)
         .then((data) => {
-          console.log(data.data);
           setWeather(data.data);
         })
         .catch((err) => {});
@@ -30,6 +29,24 @@ export const ApartmentPage = ({ apartment }) => {
     <>
       {apartment && (
         <div className="apartment-card">
+          {apartment.city && apartment.city.name && (
+            <p>
+              <strong>עיר:</strong> {apartment.city.name}
+            </p>
+          )}
+
+          {weather.temperature && (
+            <p>
+              {weather.temperature} °C <strong>:טמפרטורה</strong>
+            </p>
+          )}
+          {weather.descriptionHebrew && (
+            <>
+              <span>תיאור טמפרטורה</span>:
+              <strong>{" "}{weather.descriptionHebrew}{" "}</strong>
+            </>
+          )}
+
           {(apartment.picture && <img src={`${process.env.PUBLIC_URL}/images/aparts/${apartment.picture}`} alt={apartment.name} />) || (
             <img src={`${process.env.PUBLIC_URL}/images/aparts/1.jpg`} alt={apartment.name} />
           )}
@@ -87,18 +104,6 @@ export const ApartmentPage = ({ apartment }) => {
               {advertiserDetails.phoneNumber} <strong>:טלפון</strong>
             </p>
           )) || <p>אין מפרסם</p>}
-          {apartment.city && apartment.city.name && (
-            <p>
-              <strong>עיר:</strong> {apartment.city.name}
-            </p>
-          )}
-          
-          {weather.temperature && (
-            <p>
-              {weather.temperature} °C <strong>:טמפרטורה</strong>
-            </p>
-          )}
-          {weather.descriptionHebrew && <p>{weather.descriptionHebrew}</p>}
         </div>
       )}
     </>

@@ -1,11 +1,11 @@
 .about-us {
-    max-width: 800px; /* גודל מקסימלי לרוחב */
-    margin: 20px auto; /* מרכז את הקומפוננטה */
-    padding: 20px; /* ריווח פנימי */
-    border: 1px solid #ddd; /* גבול סביב הקומפוננטה */
-    border-radius: 8px; /* פינות מעוגלות */
-    background-color: #f9f9f9; /* צבע רקע */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* צל */
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .about-us h2 {

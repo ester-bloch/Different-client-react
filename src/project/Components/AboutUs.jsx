@@ -1,5 +1,5 @@
 import React from 'react';
-import './AboutUs.css'; // קובץ CSS לעיצוב
+import './AboutUs.css'; 
 
 const AboutUs = () => {
     return (

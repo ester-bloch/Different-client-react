@@ -14,16 +14,12 @@ export const AddApartment = ({ handleClose, handleConfirm }) => {
   if (!handleClose)
     handleClose = () => {
       setOpen(false);
-      navigate(parenrPath); // ניתוב לנתיב החדש
+      navigate(parenrPath); 
     };
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-title" aria-describedby="modal-description">
       <Box sx={style}>
         <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: 2 }}>
-          {/* <Button variant="contained" color="primary" onClick={handleConfirm}>
-            אישור
-          </Button> */}
-
           <MyButton myOnClick={handleClose} textToShow={"ביטול"} iconName={"fa-solid fa-window-close"} backgroundColor={"red"} />
         </Box>
         <CreaterOrUpdateApartment textForH1={"הוספת דירה"} apartment={ null} functionToUpdate={addapart} />
@@ -42,8 +38,8 @@ const style = {
   boxShadow: 24,
   p: 4,
   borderRadius: 2,
-  maxHeight: '80vh', // הגבלת גובה החלון ל-80% מגובה המסך
-  overflowY: 'auto', // הוספת גלילה אנכית
+  maxHeight: '80vh', 
+  overflowY: 'auto', 
 };
 
 

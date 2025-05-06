@@ -17,10 +17,9 @@ export const Routing = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // שינוי ה-title לפי הנתיב הנוכחי
     switch (location.pathname) {
       case "/Home":
-        document.querySelector("link[rel*='icon']").href = `${process.env.PUBLIC_URL}/images/logo/logo.png`; // שינוי האיקון
+        document.querySelector("link[rel*='icon']").href = `${process.env.PUBLIC_URL}/images/logo/logo.png`; 
         document.title = "Home Page";
         break;
       case "/login":
@@ -41,10 +40,9 @@ export const Routing = () => {
       case "/blog":
         document.title = "blog Page";
         break;
-      // הוסף כאן מקרים נוספים עבור נתיבים אחרים
       default:
         document.title = "different";
-        document.querySelector("link[rel*='icon']").href = `${process.env.PUBLIC_URL}/images/logo/logo.png`; // שינוי האיקון
+        document.querySelector("link[rel*='icon']").href = `${process.env.PUBLIC_URL}/images/logo/logo.png`; 
     }
   }, [location]);
 
@@ -61,12 +59,14 @@ export const Routing = () => {
         <Route path="Login" element={<LoginModal></LoginModal>} />
         <Route path="register" element={<RegisterOrUpdate></RegisterOrUpdate>} />
         <Route path="aboutus" element={<AboutUs></AboutUs>} />
-        <Route path="AdvancedSearch" element={<AdvancedSearch></AdvancedSearch>} />
+        <Route path="AdvancedSearch" element={<AdvancedSearch></AdvancedSearch>}>
+          <Route path="showApart" element={<ShowApartPage open={true} />} />
+        </Route>
         <Route path="personal-area" element={<PersonalErea></PersonalErea>}>
           <Route path="editDetails" element={<UpdateAdvertiser open={true}></UpdateAdvertiser>}>
             {" "}
           </Route>
-          <Route path="updateApart" element={<UpdateApartment open={true}></UpdateApartment>}/>
+          <Route path="updateApart" element={<UpdateApartment open={true}></UpdateApartment>} />
           <Route path="addApart" element={<AddApartment open={true}></AddApartment>}>
             {" "}
           </Route>

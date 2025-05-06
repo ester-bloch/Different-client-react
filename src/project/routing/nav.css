@@ -1,28 +1,9 @@
 .Nav {
-    transition: background-color 0.3s, height 0.3s;
-    /* אנימציה לשינוי צבע וגובה */
-    position: relative;
-    /* נדרש עבור שינוי מיקום */
-    z-index: 1000;
-    /* לוודא שה-Navigation מעל לתוכן */
-    display: grid;
-    grid-template-columns: auto auto auto;
-    /* לוגו, קישורים, כניסה */
-    align-items: center;
-    background-color: #2c3e50;
-    /* צבע רקע כהה */
-    padding: 15px 20px;
-    /* רווח פנימי מוגבר */
-    height: 70px;
-    /* גובה קבוע */
-}
-
-.Nav {
-    display: flex; /* שים לב לשינוי כאן */
-    justify-content: space-between; /* מפזר את הפריטים */
     transition: background-color 0.3s, height 0.3s, box-shadow 0.3s;
     position: relative;
     z-index: 1000;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: #2c3e50;
     padding: 15px 20px;
@@ -31,105 +12,59 @@
 
 .forLogo {
     width: 100px;
-    /* רוחב הלוגו */
     height: 50px;
-    /* גובה הלוגו */
 }
-
-
-
 
 .forLogin {
     margin-right: 40px;
-    /* רווח לפני הכפתור לכניסה */
 }
-
-
-/* מכאן חדש */
-
-
 
 .fixed {
     position: fixed;
-    /* הופך את ה-Navigation לקבוע */
     top: 0;
-    /* מיקום למעלה */
     left: 0;
-    /* מיקום לשמאל */
     right: 0;
-    /* מיקום לימין */
     height: 70px;
-    /* גובה קטן יותר */
     background-color: rgba(44, 62, 80, 0.9);
-    /* שקיפות */
 }
-
-
-
 
 @media (max-width: 600px) {
     .Nav {
         grid-template-columns: 1fr;
-        /* עיצוב עמודה אחת */
         height: auto;
-        /* גובה אוטומטי */
     }
 
     .NavLinks {
         flex-direction: column;
-        /* קישורים בעמודה */
         gap: 20px;
-        /* רווח קטן יותר */
     }
 }
 
-
 .Nav {
-    transition: background-color 0.3s, height 0.3s, box-shadow 0.3s;
-    /* הוספת אנימציה לצל */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    /* צל להדגשת ה-Navigation */
 }
-
 
 .NavLink:hover {
     color: #f39c12;
-    /* צבע כשמעבירים מעל */
     transform: scale(1.1);
-    /* הגדלה קלה כשמעבירים מעל */
 }
-
 
 .NavLink {
     font-weight: bold;
-    /* טקסט מודגש */
     padding: 10px 0;
-    /* רווח פנימי אנכי - שונה מ-5px ל-10px */
-    /* הוספת אנימציה להגדלה */
-    /* אנימציה לשינוי צבע וגבול */
     transition: color 0.3s, border-bottom 0.3s, transform 0.3s;
-
     color: #ecf0f1;
-    /* צבע טקסט בהיר */
     text-decoration: none;
-    /* מסיר קו תחתון */
-    font-weight: bold;
-    /* טקסט מודגש */
 }
-
 
 .NavLink.active {
     color: #f39c12;
-    /* צבע עבור קישור פעיל */
     border-bottom: 2px solid #f39c12;
-    /* קו תחתון עבור קישור פעיל */
 }
 
 .NavLinks {
     display: flex;
-    /* רווח בין הקישורים */
     gap: 60px;
-    /* רווח בין הקישורים - שונה מ-40px ל-60px */
 }
 
 .forLogo {
@@ -139,19 +74,11 @@
 
 .logo {
     height: 100px;
-    /* גובה הלוגו הרגיל */
     width: auto;
-    /* שומר על יחס הגובה-רוחב */
     margin-right: 20px;
-    /* רווח בין הלוגו לשאר התוכן */
     transition: height 0.3s ease, transform 0.3s ease;
-    /* הוספת אנימציה לגובה */
 }
-
-
-
 
 .Nav.fixed .logo {
     height: 80px;
-    /* גובה קטן יותר */
 }

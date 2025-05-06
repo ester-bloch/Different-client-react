@@ -8,30 +8,25 @@ import { MyButton } from "./MyButton";
 
 export const UpdateAdvertiser = ({ handleClose, handleConfirm }) => {
   const [open, setOpen] = useState(true);
-  const location=useLocation()
-  const navigate=useNavigate()
-  const fatherPath = location.pathname.split("/").slice(0, -1).join("/"); // מסיר את החלק האחרון מהנתיב
+  const location = useLocation();
+  const navigate = useNavigate();
+  const fatherPath = location.pathname.split("/").slice(0, -1).join("/");
   if (!handleClose)
     handleClose = () => {
       setOpen(false);
-    const pathSegments = location.pathname.split('/').filter(segment => segment); // מפצל את הנתיב לחלקים
-    pathSegments.pop(); // מסיר את החלק האחרון
-    const newPath = `/${pathSegments.join('/')}`; // בונה את הנתיב החדש
-    navigate(fatherPath); // ניתוב לנתיב החדש
+      const pathSegments = location.pathname.split("/").filter((segment) => segment);
+      pathSegments.pop();
+      const newPath = `/${pathSegments.join("/")}`;
+      navigate(fatherPath);
     };
   const thisAdvertiser = useSelector((s) => s.advertise.thisAdvertiser);
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="modal-title" aria-describedby="modal-description">
       <Box sx={style}>
         <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: 2 }}>
-          {/* <Button variant="contained" color="primary" onClick={handleConfirm}>
-            אישור
-          </Button> */}
-           
-          <MyButton myOnClick={handleClose} textToShow={"ביטול"} iconName={"fa-solid fa-window-close"} backgroundColor={"red"}/>
+          <MyButton myOnClick={handleClose} textToShow={"ביטול"} iconName={"fa-solid fa-window-close"} backgroundColor={"red"} />
         </Box>
         <RegisterOrUpdate textForH1={"עדכון פרטים"} advertiser={thisAdvertiser} functionToUpdate={updateAdvertiser} />
-
       </Box>
     </Modal>
   );
@@ -48,5 +43,3 @@ const style = {
   p: 4,
   borderRadius: 2,
 };
-
-

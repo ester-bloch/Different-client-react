@@ -6,9 +6,9 @@ export const Home = () => {
   return (
     <><main>
       <Outlet></Outlet>
-      <AdvancedSearch></AdvancedSearch>
       <Apartments></Apartments>
       </main>
     </>
   );
 };
+export default Home;
