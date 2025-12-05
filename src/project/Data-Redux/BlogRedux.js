@@ -159,7 +159,7 @@ export const PostRedux = produce((state, action) => {
         case "SET_CURRENT_POST": {
             const post = state.posts.find((post) => post.id === action.payload);
             if (post) {
-                state.currentPost = post; // עדכון ה-currentPost עם הפוסט שנמצא
+                state.currentPost = post; 
             }
             break;
         }

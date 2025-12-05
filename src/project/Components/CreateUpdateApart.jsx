@@ -160,58 +160,65 @@ export const CreaterOrUpdateApartment = ({ apartment, functionToUpdate, textForH
       };
       reader.readAsDataURL(file);
     }
+  };
+  const saveImageToServer = (imageData) => {};
 
-    const saveImageToServer = (imageData) => {};
+  const addMoreField = () => {
+    setFormData({ ...formData, more: [...formData.more, ""] });
+  };
 
-    const addMoreField = () => {
-      setFormData({ ...formData, more: [...formData.more, ""] });
-    };
+  const removeMoreField = (index) => {
+    const newMore = formData.more.filter((_, i) => i !== index);
+    setFormData({ ...formData, more: newMore });
+  };
 
-    const removeMoreField = (index) => {
-      const newMore = formData.more.filter((_, i) => i !== index);
-      setFormData({ ...formData, more: newMore });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      if (functionToUpdate) {
+        let transformedData = {
+          advertiser: user._id,
+          category: formData.category._id,
+          city: formData.city._id,
+          description: formData.description,
+          more: formData.more.map((item) => item),
+          name: formData.name,
+          picture: formData.picture,
+          price: formData.price,
+        };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (validate()) {
-        if (functionToUpdate) {
-          let transformedData = {
-            advertiser: user._id,
-            category: formData.category._id,
-            city: formData.city._id,
-            description: formData.description,
-            more: formData.more.map((item) => item), 
-            name: formData.name,
-            picture: formData.picture,
-            price: formData.price,
-          };
-
-          let __id = apartment ? apartment._id : "";
-          functionToUpdate(transformedData, __id)
-            .then((ans) => {
-              getApartsByAdvertiser(user._id)
-                .then((ans) => {
-                })
-                .catch((err) => console.log(err));
-              navigate(ParentPath);
-            })
-            .catch((err) => {
-              Swal.fire({
-                title: err,
-                text: err.message,
-                icon: "error",
-                confirmButtonText: "בסדר",
-              });
+        let __id = apartment ? apartment._id : "";
+        console.log(transformedData);
+        debugger;
+        functionToUpdate(transformedData, __id)
+          .then((ans) => {
+            console.log(ans);
+            debugger;
+            getApartsByAdvertiser(user._id)
+              .then((ans) => {
+                let aparts = ans.data;
+                dispatch(setApartmentOfThisAdvertiser(aparts));
+              })
+              .catch((err) => console.log(err));
+            navigate(ParentPath);
+          })
+          .catch((err) => {
+            Swal.fire({
+              title: err,
+              text: err.message,
+              icon: "error",
+              confirmButtonText: "בסדר",
             });
-        } else {
-        }
+          });
       } else {
-        alert("יש למלא את כל השדות הנדרשים");
       }
-    };
+    } else {
+      alert("יש למלא את כל השדות הנדרשים");
+    }
+  };
 
-    return (
+  return (
+    <>
       <form onSubmit={handleSubmit}>
         <h2>{textForH1 ? textForH1 : "הוספת דירה"} </h2>
 
@@ -227,9 +234,9 @@ export const CreaterOrUpdateApartment = ({ apartment, functionToUpdate, textForH
         </div>
 
         <div>
-          <label htmlFor="price">מחיר:</label> 
+          <label htmlFor="price">מחיר:</label>
           <input type="number" name="price" value={formData.price} onChange={handleChange} />
-          {errors.price && <p style={{ color: "red" }}>{errors.price}</p>} 
+          {errors.price && <p style={{ color: "red" }}>{errors.price}</p>}
         </div>
 
         <div>
@@ -291,6 +298,6 @@ export const CreaterOrUpdateApartment = ({ apartment, functionToUpdate, textForH
 
         <MyButton myType="submit" iconName={"fa-solid fa-check"} textToShow={"אישור"} />
       </form>
-    );
-  };
+    </>
+  );
 };

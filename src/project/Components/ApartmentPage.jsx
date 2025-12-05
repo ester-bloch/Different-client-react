@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAdvertiserDetails, getWeather } from "../scripts/api";
-import { translate } from "@vitalets/google-translate-api";
 import "./ApartmentPage.css";
-// import './Blog.css';
+
 
 export const ApartmentPage = ({ apartment }) => {
   const [weather, setWeather] = useState({});

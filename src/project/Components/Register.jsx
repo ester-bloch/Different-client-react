@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import "./Register.css";
 import { MyButton } from "./MyButton";
 import { useDispatch } from "react-redux";
-import { setAdvertiser, setAdvertiserFromRegister } from "../Data-Redux/advertiserRedux";
-import { register } from "../scripts/api";
+import { setAdvertiser, setAdvertiserFromRegister, setToken } from "../Data-Redux/advertiserRedux";
+import { Login, register } from "../scripts/api";
 import { useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useParentPath from "../scripts/ParetntPath";
+import { jwtDecode } from "jwt-decode";
 export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) => {
   const dispatch = useDispatch();
-  const ParentPath =useParentPath()
+  const ParentPath = useParentPath();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -19,9 +20,9 @@ export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) =>
     phoneNumber2: "",
     apartments: "",
     name: "",
-    ...advertiser && { ...advertiser, password2: advertiser.password }
+    ...(advertiser && { ...advertiser, password2: advertiser.password }),
   });
-  
+
   const errorOptions = {
     name: "שם קצר מידי",
     email: "כתובת מייל לא תקינה",
@@ -99,13 +100,28 @@ export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) =>
       if (functionToUpdate != undefined) {
         functionToUpdate(formData)
           .then((ans) => {
-            dispatch(setAdvertiser(ans.data.advertiser)) 
+            dispatch(setAdvertiser(ans.data.advertiser));
             Swal.fire({
               title: "! פרטיך עודכנו",
               text: "!עודכן בהצלחה",
               icon: "success",
               confirmButtonText: "תודה",
             });
+            let details = {
+              email: formData.email,
+              password: formData.password,
+            };
+            Login(details).then((ans) => {
+              let { token, thisAdvertiser } = ans.data;
+              delete thisAdvertiser["password"];
+              dispatch(setAdvertiser(thisAdvertiser));
+              dispatch(setToken(token));
+              const decoded = jwtDecode(token);
+              localStorage.setItem("different_decoded_Token", JSON.stringify(decoded));
+              localStorage.setItem("different_token", token);
+              localStorage.setItem("different_this_advertiser", JSON.stringify(thisAdvertiser));
+            });
+            dispatch(setAdvertiser(JSON.parse(localStorage.getItem("different_this_advertiser"))));
             navigate(ParentPath)
           })
           .catch((err) => {
@@ -116,7 +132,7 @@ export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) =>
               icon: "error",
               confirmButtonText: "בסדר",
             });
-            navigate(ParentPath)
+            navigate(ParentPath);
           });
       } else {
         functionToUpdate == undefined &&
@@ -124,10 +140,11 @@ export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) =>
             .then(() => {
               Swal.fire({
                 title: "!ברוך הבא",
-                text: r,
+              text: " כעת לחץ על כניסת מפרסם והיכנס!diferrent נרשמת בהצלחה ל ",
                 icon: "success",
-                confirmButtonText: "בסדר",
+                confirmButtonText: "ok",
               });
+              navigate(ParentPath);
             })
             .catch((err) => {
               Swal.fire({
@@ -137,20 +154,19 @@ export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) =>
                 confirmButtonText: "בסדר",
               });
             });
-
+        navigate(ParentPath);
       }
       let r = " כעת לחץ על כניסת מפרסם והיכנס!diferrent נרשמת בהצלחה ל ";
 
       dispatch(setAdvertiserFromRegister(formData));
-      navigate("./");
+      navigate(ParentPath);
     }
   };
-  
+
   return (
     <>
       <form
         onSubmit={handleSubmit}
-        
         style={{
           maxWidth: "400px",
           margin: "auto",

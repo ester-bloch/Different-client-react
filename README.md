@@ -1,3 +1,98 @@
+ # Different - Apartment Rental Platform
+
+ A modern React-based apartment rental platform with Hebrew language support, featuring advanced search capabilities and user management.
+
+ ## 🏠 Project Overview
+
+ Different is a comprehensive apartment rental web application that connects apartment seekers with advertisers. The platform provides an intuitive interface for browsing, searching, and managing apartment listings.
+
+ ### ✨ Key Features
+
+ - **User Authentication**: Complete registration and login system for advertisers
+ - **Apartment Management**: Add, update, and manage apartment listings
+ - **Advanced Search**: Filter apartments by price, number of rooms, city, and more
+ - **Personal Areas**: User dashboards for managing listings and profile
+ - **Responsive Design**: Mobile-friendly interface with modern UI components
+ - **Hebrew Language Support**: Fully localized interface
+ - **Image Upload**: Support for apartment photos
+ - **Weather Integration**: Location-based weather information
+
+ ### 🛠 Tech Stack
+
+ - **Frontend**: React 18, Material-UI, Styled Components
+ - **Routing**: React Router
+ - **State Management**: Redux (redux + @reduxjs/toolkit)
+ - **HTTP Client**: Axios
+ - **Styling**: CSS3 with Material-UI components
+ - **Icons**: Font Awesome
+ - **Authentication**: JWT tokens
+
+ ## 🚀 Getting Started
+
+ ### Prerequisites
+
+ - Node.js (v14 or higher)
+ - npm or yarn
+
+ ### Installation
+
+ 1. Clone the repository
+ ```bash
+ git clone https://github.com/ester-bloch/different-client-react.git
+ ```
+ 2. Navigate to project directory
+ ```bash
+ cd different-client-react
+ ```
+ 3. Install dependencies
+ ```bash
+ npm install
+ ```
+ 4. Start the development server
+ ```bash
+ npm start
+ ```
+
+ The application will open at http://localhost:3000
+
+ ## 📁 Project Structure
+
+ ```text
+ src/
+ ├── project/
+ │   ├── Components/          # React components
+ │   │   ├── AddApartment.jsx
+ │   │   ├── AdvancedSearch.jsx
+ │   │   ├── ApartmentCard.jsx
+ │   │   ├── Personal-Area.jsx
+ │   │   └── ...
+ │   ├── Data-Redux/          # Redux state management
+ │   ├── routing/             # Navigation and routing
+ │   └── scripts/             # API calls and utilities
+ ├── App.js                   # Main application component
+ └── index.js                 # Application entry point
+ ```
+
+ ## 🎯 Available Scripts
+
+ - `npm start` - Runs the app in development mode
+ - `npm test` - Launches the test runner
+ - `npm run build` - Builds the app for production
+ - `npm run eject` - Ejects from Create React App (one-way operation)
+
+ ## 🤝 Contributing
+
+ - Fork the repository
+ - Create a feature branch
+ - Commit your changes
+ - Push to the branch
+ - Open a Pull Request
+
+ ## 📄 License
+
+ This project is private and proprietary.
+
+ Built with ❤️ using React and Create React App
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -66,5 +161,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `npm run build` fails to minify
-
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

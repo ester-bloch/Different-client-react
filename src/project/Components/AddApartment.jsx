@@ -22,6 +22,7 @@ export const AddApartment = ({ handleClose, handleConfirm }) => {
         <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: 2 }}>
           <MyButton myOnClick={handleClose} textToShow={"ביטול"} iconName={"fa-solid fa-window-close"} backgroundColor={"red"} />
         </Box>
+        {/* <p>juiu</p> */}
         <CreaterOrUpdateApartment textForH1={"הוספת דירה"} apartment={ null} functionToUpdate={addapart} />
       </Box>
     </Modal>
