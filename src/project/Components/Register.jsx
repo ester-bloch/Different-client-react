@@ -140,7 +140,7 @@ export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) =>
             .then(() => {
               Swal.fire({
                 title: "!ברוך הבא",
-                text: r,
+              text: " כעת לחץ על כניסת מפרסם והיכנס!diferrent נרשמת בהצלחה ל ",
                 icon: "success",
                 confirmButtonText: "ok",
               });
