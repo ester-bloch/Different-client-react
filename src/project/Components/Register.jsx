@@ -159,7 +159,7 @@ export const RegisterOrUpdate = ({ advertiser, functionToUpdate, textForH1 }) =>
       let r = " כעת לחץ על כניסת מפרסם והיכנס!diferrent נרשמת בהצלחה ל ";
 
       dispatch(setAdvertiserFromRegister(formData));
-      navigate("./");
+      navigate(ParentPath);
     }
   };
 
