@@ -182,14 +182,12 @@ const DropZone = ({ onDrop, filters, textToShow, setSelectedFilters }) => {
 
 const AdvancedSearch = () => {
   const [availableFilters, setAvailableFilters] = useState([
-    { id: "מחיר", name: "מחיר", nameInEnglish: "price", type: "NUMERIC", min: 800, max: 1000000 }, 
+      { id: "מחיר", name: "מחיר", nameInEnglish: "price", type: "NUMERIC", min: 800, max: 1000000 }, 
     // { id: "מיקום", name: "מיקום", type: "BOOLEAN" }, 
-    { id: "מספר חדרים", name: "מספר חדרים", nameInEnglish: "numbeds", type: "NUMERIC", min: 1, max: 20 },
-    { id: "שם עיר", name: "שם עיר", nameInEnglish: "city", type: "TEXT", value: "", onChange: (newValue) => updateTextFilter("שם עיר", newValue) }, 
+      { id: "מספר חדרים", name: "מספר חדרים", nameInEnglish: "numbeds", type: "NUMERIC", min: 1, max: 20 },
+      { id: "שם עיר", name: "שם עיר", nameInEnglish: "city", type: "TEXT", value: "", onChange: (newValue) => updateTextFilter("שם עיר", newValue) }, 
     // { id: "שם מפרסם", name: "שם מפרסם", nameInEnglish: "Advertiser", type: "TEXT", value: "", onChange: (newValue) => updateTextFilter("שם מפרסם", newValue) },
-    // { id: "סוג נכס",  name: "סוג נכס", type: "SELECT", options: ["דירה", "בית פרטי", "משרד", "חנות"], selectedValue: "",
-    //   onChange: (newValue) => updateSelectFilter("סוג נכס", newValue),
-    // },
+    // { id: "סוג נכס",  name: "סוג נכס", type: "SELECT", options: ["דירה", "בית פרטי", "משרד", "חנות"], selectedValue: "", onChange: (newValue) => updateSelectFilter("סוג נכס", newValue), },
   ]);
   const [showAparts, setShowAparts] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -317,7 +315,7 @@ const AdvancedSearch = () => {
                   options={filter.options}
                   selectedValue={filter.selectedValue}
                   onChange={filter.onChange}
-                  canDrag={true} // אפשר לגרור את המסנן
+                  canDrag={true} 
                   onRemove={() => filter.onRemove()}
                 />
               );

@@ -15,7 +15,7 @@ axios.interceptors.response.use(
     },
     function (error) {
         if (error.response && error.response.status === 401) {
-            alert(" בעיית אימות", "- התקבלה שגיאה 401", error.response)
+            alert(" בעיית אימות"+ "- התקבלה שגיאה 401"+ error.response)
             return (window.location.href = "/register");
         }
         return Promise.reject(error);
